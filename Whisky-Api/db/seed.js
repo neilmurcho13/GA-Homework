@@ -1,4 +1,4 @@
-import WhiskySearch from '../whisky/whisky.js';
+import WhiskySearch from '../models/whisky.js';
 import { whiskySeedData } from '../db/whiskySeedData.js';
 import { connectDb, disconnectDb, truncatedDb } from './helpers.js';
 
@@ -17,7 +17,7 @@ async function seed() {
 
         console.log('🤖 Something went wrong with seeding the database', err);
     }
-    disconnectDb
+    disconnectDb();
 }
 
 seed();

@@ -1,0 +1,9 @@
+Tuesday notes 
+
+Next step is to set up the tasting schema 
+
+const tastingSchema = new mongoose.Schema({
+    nosing: { type: Number, required: true, min: 1, max: 5 },
+    tasting: { type: Number, required: true, min: 1, max: 5 },
+})
+
