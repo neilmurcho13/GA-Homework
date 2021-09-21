@@ -64,16 +64,17 @@ async function deleteCountry(req, res, next) {
   const { id } = req.params;
 
   try {
-    const countryToDelete = await Country.findByIdAndDelete(id);
+    const country = await Country.findByIdAndDelete(id);
 
     if (!country) {
-      return res.status(404).send({ message: "Actor does not exist " });
+      return res.status(404).send({ message: "Country does not exist " });
     }
-    const countriesToRemove = countries.whiskies.map((whisky) =>
+    const whiskiesToRemove = country.whiskies.map((whisky) =>
       whisky.toString()
     );
+
     await WhiskySearch.updateMany(
-      { _id: countryToRemove },
+      { _id: whiskiesToRemove },
       { $pull: { countries: country._id } }
     );
 
@@ -120,4 +121,5 @@ export default {
   createCountry,
   getCountry,
   deleteCountry,
+  updateCountry,
 };

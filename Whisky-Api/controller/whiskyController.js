@@ -26,9 +26,8 @@ async function createWhisky(req, res, next) {
 }
 
 async function getWhisky(req, res, next) {
-  const id = req.params.id;
-
   try {
+    const id = req.params.id;
     const whisky = await WhiskySearch.findById(id);
     return res.status(200).json(whisky);
   } catch (err) {
@@ -37,9 +36,8 @@ async function getWhisky(req, res, next) {
 }
 
 async function deleteWhisky(req, res, next) {
-  const id = req.params.id;
-
   try {
+    const id = req.params.id;
     const whisky = await WhiskySearch.findByIdAndDelete(id);
 
     if (!whisky) {
