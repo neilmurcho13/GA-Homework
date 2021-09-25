@@ -2,39 +2,50 @@ import express from "express";
 import whiskyController from "../controller/whiskyController.js";
 import commentsController from "../controller/commentsController.js";
 import countriesController from "../controller/countriesController.js";
+import userController from "../controller/userController.js";
+import secureRoute from "../middleware/secureRoute.js";
 
 const router = express.Router();
 
 router
   .route("/whisky")
   .get(whiskyController.getAllWhisky)
-  .post(whiskyController.createWhisky);
+  .post(secureRoute, whiskyController.createWhisky);
 
 router
   .route("/whisky/:id")
   .get(whiskyController.getWhisky)
-  .delete(whiskyController.deleteWhisky)
-  .put(whiskyController.updateWhisky);
+  .delete(secureRoute, whiskyController.deleteWhisky)
+  .put(secureRoute, whiskyController.updateWhisky);
 
-router.route("/whisky/:id/comments").post(commentsController.createComment);
+router
+  .route("/whisky/:id/comments")
+  .post(secureRoute, commentsController.createComment);
 
 router
   .route("/whisky/:id/comments/:commentId")
-  .delete(commentsController.deleteComment)
-  .put(commentsController.updateComment);
+  .delete(secureRoute, commentsController.deleteComment)
+  .put(secureRoute, commentsController.updateComment);
 
 router
   .route("/countries")
   .get(countriesController.getAllCountries)
-  .post(countriesController.createCountry);
+  .post(secureRoute, countriesController.createCountry);
 
 router
   .route("/countries/:id")
   .get(countriesController.getCountry)
-  .put(countriesController.updateCountry)
-  .delete(countriesController.deleteCountry);
+  .put(secureRoute, countriesController.updateCountry)
+  .delete(secureRoute, countriesController.deleteCountry);
 
 //     AllWhiskiesForCountry);
+Router.route("/actors/:id/movies").get(actorsController.getAllMoviesForActor);
+
+Router.route("/movies/id:/actors").get(moviesController.getAllActorsForMovie);
+
+Router.route("/register").post(userController.registerUser);
+
+Router.route("/login").post(userController.loginUser);
 
 // router.route("/whisky/:id/countries").get(whiskyController.getAllCountries);
 
